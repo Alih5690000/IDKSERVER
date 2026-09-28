@@ -3,8 +3,9 @@
 
 int main(){
     httplib::Server server;
-    server.Post("/hello", [](auto req, auto res){
-        res.body="Lol";
+    server.Get("/hello", [](auto& req, auto& res){
+        std::cout<<"Got request"<<std::endl;
+        res.body="lol";
     });
-    server.listen("localhost",8000);
+    server.listen("0.0.0.0",8000);
 }
