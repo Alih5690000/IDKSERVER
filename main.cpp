@@ -37,16 +37,11 @@ int main(){
         time_t start,end;
         time_t dt;
         while (true){
-            start=time(NULL);
-            dt=start-end;
-            timer+=dt;
-            if (timer>cd){
-                timer%=cd;
-                DataBase d=db;
-                d.WriteTo("data.db");
-            }
+            std::this_thread::sleep_for(std::chrono::seconds(cd));
+            DataBase d=db;
+            d.WriteTo("data.db");
         }
-    }, 2000);
+    }, 2);
     httplib::Server server;
     server.Get("/hello", [](auto& req, auto& res){
         std::cout<<"Got request"<<std::endl;
